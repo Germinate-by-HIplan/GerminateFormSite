@@ -44,6 +44,9 @@
 
     <script src="script.js"></script>
     <script>
+        document.getElementById('confirmation-msg-error').style.display = 'none';
+        document.getElementById('confirmation-msg').style.display = 'none';
+
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
             
