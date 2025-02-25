@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Germinate Contact Form</h2>
+        <form id="contact-form">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <div class="buffer"></div>
+
+            <label for="q1">Are you experiencing any climate change related challenges? If so, please explain in as much detail as possible.</label>
+            <textarea id="q2" name="message" rows="5" required></textarea>
+            
+            <label for="q2">Would it be valuable to you to have a buyer and set price prior to planting?</label>
+            <textarea id="q2" name="message" rows="5" required></textarea>
+
+            <label for="q3">What are your biggest challenges right now?
+            </label>
+            <textarea id="q3" name="message" rows="5" required></textarea>
+
+            <label for="q4">Who is your support system when you need help?</label>
+            <textarea id="q4" name="message" rows="5" required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+        <p id="response-msg"></p>
+
+        <div id="confirmation-msg" class="success">Message sent successfully!</div>
+        <div id="confirmation-msg-error" class="error">Error sending message.</div>
+        
+    </div>
+
+
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(this);
+            fetch('send_email.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('response-msg').textContent = data;
+
+                document.getElementById('confirmation-msg').style.display = 'block';
+                document.getElementById('confirmation-msg-error').style.display = 'none';
+            })
+            .catch(error => {
+                document.getElementById('response-msg').textContent = 'Error sending message.';
+            });
+        });
+    </script>
+</body>
+</html>
